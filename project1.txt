@@ -1,0 +1,91 @@
+create database toko_buku
+use toko_buku
+
+create table supplier(
+    id int(10) primary key,
+    nama varchar(255) not null,
+    telepon int(14) not null,
+    email varchar(255));
+create table katalog(
+    id int(10) primary key,
+    isbn int(14) not null,
+    judul varchar(255) not null,
+    pengarang varchar(255),
+    penerbit varchar(225),
+    tahun_terbit int(10),
+    stock int(5) not null,
+    harga_jual int(7) not null,
+    harga_beli int(7) not null,
+    id_supplier int(10) not null,
+    foreign key(id_supplier) references supplier(id));
+create table kurir(
+    id int(10) primary key,
+    nama varchar(255) not null,
+    telepon int(14) not null,
+    email varchar(255));
+create table pelanggan(
+    id int(10) primary key,
+    nama varchar(255) not null,
+    telepon int(14) not null,
+    alamat varchar(255) not null,
+    email varchar(255),
+    no_kartu_kredit int(14));
+create table akun(
+    id int(10) primary key,
+    id_pelanggan int(10),
+    foreign key(id_pelanggan) references pelanggan(id),
+    username varchar(255) not null,
+    password varchar(255) not null);
+create table pemesanan(
+    id int(10) primary key,
+    tanggal date,
+    id_buku int(10),
+    foreign key(id_buku) references katalog(id),
+    jumlah int(5) not null,
+    id_pelanggan int(10),
+    foreign key(id_pelanggan) references pelanggan(id),
+    alamat_kirim varchar(255) not null);
+create table pengiriman(
+    id int(10) primary key,
+    id_pemesanan int(10),
+    foreign key(id_pemesanan) references pemesanan(id),
+    tanggal_kirim date,
+    tanggal_terima date,
+    status int(1) not null,
+    no_resi int(15) not null,
+    id_kurir int(15),
+    foreign key(id_kurir) references kurir(id));
+
+insert into supplier values
+    (1, 'hudha', 081432657867, 'hudha@gmail.com'),
+    (2, 'aris', 083536474636, 'aris@gmail.com'),
+    (3, 'adi', 084635847267, 'adi@gmail.com'),
+    (4, 'agus', 082647387826, 'agus@gmail.com'),
+    (5, 'ail', 082647365567, 'ail@gmail.com'),
+    (6, 'bagong', 085776434098, 'bagong@gmail.com'),
+    (7, 'gaga', 087664553332, 'gaga@gmail.com'),
+    (8, 'dana', 084567328785, 'dana@gmail.com'),
+    (9, 'febri', 083456826567, 'febri@mail.com'),
+    (10, 'valen', 086213456212, 'valen@gmail.com');
+insert into katalog values
+    (1, 9873647859, 'laskar pelangi', 'andrea', 'bentang pusaka', 2021, 50, 100000, 95000, 7),
+    (2, 6723692646, 'pulang', 'leila', 'gramedia', 2000, 100, 50000, 45000, 8),
+    (3, 4832754875, 'bumi manusia', 'pramoedya', 'hastra mitra', 1990, 20, 60000, 55000, 2),
+    (4, 4582457235, 'ronggeng dukuh pareuk', 'tohari', 'gramedia', 1989, 300, 80000, 75000, 8),
+    (5, 4863745764, 'cinta dalam gelas', 'andrea', 'bentang pusaka', 2020, 80, 90000, 85000, 7),
+    (6, 5879629768, 'ayat cinta', 'habibburahman', 'republika', 2000, 76, 75000, 70000,1),
+    (7, 6923748609, 'tenggelamnya kapal van der wijk', 'hamka', 'panjoimas', 1999, 98, 57000, 52000, 3),
+    (8, 5783216787, 'perahu kertas', 'lestari', 'bentang', 2008, 45, 34000, 29000, 5),
+    (9, 5783294658, 'sang pemimpin', 'andrea', 'bentang', 2006, 78, 25000, 20000, 10),
+    (10, 5283645246, 'lelaki harimau', 'eka', 'gramedia', 2009, 67, 40000, 35000, 6);
+insert into kurir values
+    (1, 'ilham', 084267346563, 'iham@gmail.com'),
+    (2, 'fajrul', 084562863456, 'fajrul@gmail.com'),
+    (3, 'asep', 086357265387, 'asep@gmail.com'),
+    (4, 'maman', 081276728763, 'maman@gmail.com'),
+    (5, 'jojo', 082694326872, 'jojo@gmail.com'),
+    (6, 'jani', 089376984698, 'jani@gmail.com'),
+    (7, 'kepin', 086735825378, 'kepin@gmail.com'),
+    (8, 'armando', 08754756874, 'armando@gmail.com'),
+    (9, 'zaki', 085645372647, 'zaki@gmail.com'),
+    (10, 'dapa', 084683645867, 'dapa@gmail.com');
