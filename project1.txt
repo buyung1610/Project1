@@ -89,3 +89,5 @@ insert into kurir values
     (8, 'armando', 08754756874, 'armando@gmail.com'),
     (9, 'zaki', 085645372647, 'zaki@gmail.com'),
     (10, 'dapa', 084683645867, 'dapa@gmail.com');
+
+ini file ke 2
